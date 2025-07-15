@@ -1,0 +1,70 @@
+{
+  "name": "sinova-plasmo-template",
+  "displayName": "Sinova plasmo template",
+  "version": "0.0.1",
+  "description": "template for plasmo ext",
+  "author": "sinova.dev",
+  "scripts": {
+    "dev": "plasmo dev",
+    "build": "plasmo build",
+    "package": "plasmo package",
+    "prepare": "husky",
+    "pre-commit": "pnpm install && git add pnpm-lock.yaml && pnpm lint-staged --allow-empty && tsc --noEmit",
+    "lint": "eslint . --ext .ts,.tsx --fix",
+    "lint:check": "eslint . --ext .ts,.tsx",
+    "lint-staged": "lint-staged"
+  },
+  "dependencies": {
+    "@plasmohq/messaging": "^0.7.2",
+    "@radix-ui/react-slot": "^1.2.3",
+    "@rpavlenko.sinova/prettier-config": "^1.0.5",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.525.0",
+    "plasmo": "0.90.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "scheduler": "^0.26.0",
+    "svgo": "^3.0.2",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "3.4.1",
+    "tw-animate-css": "^1.3.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.30.1",
+    "@ianvs/prettier-plugin-sort-imports": "4.1.1",
+    "@plasmohq/storage": "^1.15.0",
+    "@types/chrome": "0.0.258",
+    "@types/node": "20.11.5",
+    "@types/react": "18.2.48",
+    "@types/react-dom": "18.2.18",
+    "@types/scheduler": "^0.26.0",
+    "@typescript-eslint/eslint-plugin": "^8.36.0",
+    "@typescript-eslint/parser": "^8.36.0",
+    "eslint": "^9.30.1",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2",
+    "postcss": "8.4.33",
+    "prettier": "3.2.4",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "typescript": "5.3.3"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown",
+    "*.{js,jsx,ts,tsx,mjs,cjs}": "eslint"
+  },
+  "manifest": {
+    "host_permissions": [
+      "https://*/*"
+    ],
+    "permissions": [
+      "storage"
+    ]
+  }
+}

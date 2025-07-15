@@ -1,0 +1,7 @@
+.plasmo
+
+build
+assets
+
+node_modules
+pnpm-lock.yaml
