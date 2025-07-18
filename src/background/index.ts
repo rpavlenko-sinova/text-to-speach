@@ -1,4 +1,16 @@
-// Import message handlers to register them
-import '~background/messages/iconCount';
+import OFFSCREEN_URL from 'url:~/src/offscreen.html';
 
-console.log('background script loaded');
+async function ensureOffscreenDocument() {
+  const isExist = await chrome.offscreen.hasDocument();
+  if (isExist) {
+    return;
+  }
+
+  await chrome.offscreen.createDocument({
+    url: OFFSCREEN_URL,
+    reasons: [chrome.offscreen.Reason.USER_MEDIA],
+    justification: 'Need audio input for processing voice commands',
+  });
+}
+
+ensureOffscreenDocument();

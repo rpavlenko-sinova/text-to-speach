@@ -28,12 +28,6 @@ export default [
         ...globals.node,
         browser: 'readonly',
         chrome: 'readonly',
-        SpeechRecognition: 'readonly',
-        webkitSpeechRecognition: 'readonly',
-        SpeechRecognitionEvent: 'readonly',
-        SpeechRecognitionResult: 'readonly',
-        SpeechRecognitionResultList: 'readonly',
-        SpeechRecognitionAlternative: 'readonly',
       },
     },
     plugins: {

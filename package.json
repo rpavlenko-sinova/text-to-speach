@@ -10,14 +10,17 @@
     "package": "plasmo package",
     "prepare": "husky",
     "pre-commit": "pnpm install && git add pnpm-lock.yaml && pnpm lint-staged --allow-empty && tsc --noEmit",
-    "lint": "eslint . --ext .ts,.tsx --fix",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --max-warnings 0",
     "lint:check": "eslint . --ext .ts,.tsx",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "format": "prettier . --write --log-level=warn",
+    "format:check": "prettier . --check --log-level=warn",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
   },
   "dependencies": {
     "@plasmohq/messaging": "^0.7.2",
     "@radix-ui/react-slot": "^1.2.3",
-    "@rpavlenko.sinova/prettier-config": "^1.0.5",
+    "@rpavlenko.sinova/prettier-config": "^1.0.31",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.525.0",
@@ -67,7 +70,8 @@
     "permissions": [
       "storage",
       "activeTab",
-      "scripting"
+      "scripting",
+      "offscreen"
     ]
   }
 }

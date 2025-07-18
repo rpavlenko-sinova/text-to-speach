@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-no-leaked-render */
+import { Settings } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
 import { Button } from '~components/ui/button';
@@ -17,6 +18,9 @@ const IndexPopup = () => {
 
   const startRecognition = async () => {
     try {
+      // First, request microphone permission through offscreen document
+      chrome.runtime.sendMessage({ type: 'REQUEST_MICROPHONE_PERMISSION' });
+
       const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
       if (!tab.id) {
@@ -130,6 +134,15 @@ const IndexPopup = () => {
         setIsListening(false);
       } else if (message.type === 'SPEECH_END') {
         setIsListening(false);
+      } else if (message.type === 'MICROPHONE_PERMISSION_GRANTED') {
+        console.log('Microphone permission granted');
+        // Continue with speech recognition
+      } else if (message.type === 'MICROPHONE_PERMISSION_DENIED') {
+        console.error('Microphone permission denied:', message.data?.error);
+        alert(
+          'Microphone permission is required for speech-to-text functionality. Please grant permission in the offscreen document.',
+        );
+        setIsListening(false);
       }
     };
 
@@ -139,6 +152,10 @@ const IndexPopup = () => {
       chrome.runtime.onMessage.removeListener(messageListener);
     };
   }, []);
+
+  const openSettings = () => {
+    chrome.runtime.openOptionsPage();
+  };
 
   return (
     <div className="flex h-full w-[600px] items-center justify-center gap-2">
@@ -164,6 +181,15 @@ const IndexPopup = () => {
           className={isListening ? 'bg-red-500 hover:bg-red-600' : ''}
         >
           {isListening ? 'Stop Listening' : 'Start Speech to Text'}
+        </Button>
+        <Button
+          onClick={openSettings}
+          variant="outline"
+          size="sm"
+          className="flex items-center gap-2"
+        >
+          <Settings className="h-4 w-4" />
+          Settings
         </Button>
       </div>
     </div>
