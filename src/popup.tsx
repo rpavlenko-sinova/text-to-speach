@@ -7,6 +7,7 @@ const IndexPopup = () => {
 
   const getMicAccess = async () => {
     console.log('Sending GET_MIC_ACCESS message...');
+    setStatus('Requesting microphone access...');
     try {
       await chrome.runtime.sendMessage({ type: 'GET_MIC_ACCESS' });
     } catch (error) {
@@ -17,6 +18,7 @@ const IndexPopup = () => {
 
   const revokeMicAccess = async () => {
     console.log('Sending REVOKE_MIC_ACCESS message...');
+    setStatus('Revoking microphone access...');
     try {
       await chrome.runtime.sendMessage({ type: 'REVOKE_MIC_ACCESS' });
     } catch (error) {
@@ -60,7 +62,7 @@ const IndexPopup = () => {
       </div>
       {!!status && (
         <div
-          className={`rounded p-2 text-sm ${status.includes('Failed') ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}`}
+          className={`rounded p-2 text-sm ${status.includes('Failed') || status.includes('Error') ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}`}
         >
           {status}
         </div>
